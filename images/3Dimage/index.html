@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        img {
+            width: 500px;
+            height: 300px;
+            /* border: solid 5px red; */
+            float: left;
+        }
+
+        li {
+            position: absolute;
+            top: 0;
+            left: 0;
+            list-style: none;
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+
+        .wrap {
+            margin-top: 100px;
+            width: 100%;
+            height: 340px;
+            position: relative;
+        }
+
+        .list {
+            width: 1200px;
+            height: 310px;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+            margin-left: -600px;
+            /* border: 1px solid red; */
+        }
+
+        .p1 {
+            transform: translate3d(-345px, 0, 0) scale(0.81);
+            transition: all 1s;
+        }
+
+        .p2 {
+            transform: translate(0px, 0) scale(0.81);
+            /* transform-origin: 0 50%; */
+            opacity: 0.5;
+            z-index: 2;
+            transition: all 1s;
+        }
+
+        .p3 {
+            transform: translate3d(345px, 0, 0) scale(1);
+            z-index: 3;
+            opacity: 1;
+            transition: all 1s;
+        }
+
+        .p4 {
+            transform: translate3d(700px, 0, 0) scale(0.81);
+            /*  transform-origin: 100% 50%; */
+            transition: all 1s;
+            opacity: 0.5;
+            z-index: 2;
+        }
+
+        .p5 {
+            transform: translate3d(1045px, 0, 0) scale(0.81);
+            transition: all 1s;
+        }
+
+        .p6 {
+            transform: translate3d(1336px, 0, 0) scale(0.81);
+            transition: all 1s;
+        }
+
+        .p7 {
+            transform: translate3d(1670px, 0, 0) scale(0.81);
+            transition: all 1s;
+        }
+
+        .btn {
+            width: 55px;
+            height: 100px;
+            position: absolute;
+            background-color: #333333;
+            opacity: 0.5;
+            color: #ffffff;
+            line-height: 100px;
+            text-align: center;
+            top: 30%;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        .next {
+            right: 0;
+        }
+        .buttons{
+
+            position: relative;
+            width: 400px;
+            top:320px;
+            margin: 0 auto;
+            height: 20px;
+
+            text-align: center;
+
+
+        }
+  
+        span{
+            position: absolute;
+            box-sizing: border-box;
+            display: block;
+            width: 30px;
+            height: 3px;
+            top:4px;
+            background-color:salmon;
+            font-size: 0;
+        }
+        .buttons a{
+            position: relative;
+            width: 30px;
+            height:10px;
+            display: inline-block;
+            font-size: 0;
+        }
+        .active{
+            background-color: aquamarine;
+        }
+   
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="list">
+            <ul>
+                <li id=" p7" class="p7"><a href="#"><img src="./img/1.jpeg" alt=""></a></li>
+                <li id=" p6" class="p6"><a href="#"><img src="./img/2.jpeg" alt=""></a></li>
+                <li id=" p5" class="p5"><a href="#"><img src="./img/3.jpeg" alt=""></a></li>
+                <li id=" p4" class="p4"><a href="#"><img src="./img/4.jpeg" alt=""></a></li>
+                <li id=" p3" class="p3"><a href="#"><img src="./img/5.jpeg" alt=""></a></li>
+                <li id=" p2" class="p2"><a href="#"><img src="./img/6.jpeg" alt=""></a></li>
+                <li id=" p1" class="p1"><a href="#"><img src="./img/7.jpeg" alt=""></a></li>
+            </ul>
+
+
+        </div>
+
+        <div class="pre btn">&lt;</div>
+        <div class="next btn">&gt;</div>
+        <div class="buttons">
+            <a href="javascript:;"><span class="active"></span></a>
+            <a href="javascript:;"><span></span></a>
+            <a href="javascript:;"><span></span></a>
+            <a href="javascript:;"><span></span></a>
+            <a href="javascript:;"><span></span></a>
+            <a href="javascript:;"><span></span></a>
+            <a href="javascript:;"><span></span></a>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script> type = "text/javascript"
+        //按钮点击事件
+        carr = ["p7", "p6", "p5", "p4", "p3", "p2", "p1",]
+        var k = 0;
+        $(".pre").click(
+            function () {
+                preOne();
+                ;
+            }
+        )
+        $(".next").click(
+            function () {
+                nextOne();
+                ;
+            }
+
+        )
+        function preOne() {
+            
+            carr.unshift(carr[6]);
+            carr.pop();
+            for (var i = 0; i < $("li").length; i++) {
+                $($("li")[i]).attr("class", carr[i]);
+         
+                
+            }
+            // console.log(carr)
+            // 这里k主要为了控制底部导航显示
+                if (k==0){
+                    k=6;
+                }else{
+                    k--;
+              
+            }
+            bottom();
+          
+        }
+        function nextOne() {
+            carr.push(carr[0]);
+            carr.shift();
+            for (var i = 0; i < $("li").length; i++) {
+                $($("li")[i]).attr("class", carr[i]);
+               
+                }
+                // console.log(carr)
+                
+                if (k==6){
+                    k=0;
+                }else{
+                    k++;
+                }
+
+            bottom();
+        }
+        function bottom(){
+            $("span").removeClass("active");//清除class
+            $($("span")[k]).attr("class", "active");
+
+        }
+        //点击图片切换
+        $(document).on("click",".p4",function(){
+            nextOne();
+        })
+        $(document).on("click",".p2",function(){
+            preOne();
+        })
+        //底部导航切换
+        $(".buttons a").each(function(){
+            $(this).click(function(){
+                var myindex = $(this).index();
+                var b=myindex-k;
+                if (b==0){
+                    return;
+                }
+                else if(b>0){
+
+                    newarr = carr.splice(0,b);
+                    carr=carr.concat(newarr);
+                    for (i=0;i<carr.length;i++){
+                        $($("li")[i]).attr("class",carr[i]);
+                        k = myindex;
+                    }
+                    bottom();
+                }
+                else{
+                    carr.reverse();
+                    newarr = carr.splice(0,-b);
+                    carr=carr.concat(newarr);
+                    carr.reverse();
+                    for (i=0;i<carr.length;i++){
+                        $($("li")[i]).attr("class",carr[i]);
+                        k = myindex;
+                }
+                    bottom();
+                // console.log(myindex,k,newarr,carr)
+                }
+            })
+        })
+        
+
+
+
+        //鼠标移入暂停自动轮播
+        var id1 = setInterval(nextOne,3000);
+        $(".list").mouseover(function(){
+            clearInterval(id1);
+        })
+        $(".list").mouseleave(function(){
+            id1 = setInterval(nextOne,3000);
+        })
+        $(".btn").mouseover(function(){
+            clearInterval(id1);
+        })
+        $(".btn").mouseleave(function(){
+            id1 = setInterval(nextOne,3000);
+        })
+        $(".buttons").mouseover(function(){
+            clearInterval(id1);
+        })
+        $(".buttons").mouseleave(function(){
+            id1 = setInterval(nextOne,3000);
+        })
+    </script>
+</body>
+
+</html>
