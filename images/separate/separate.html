@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+    body,html{
+        margin:0px;
+        padding:0px;
+        overflow: hidden;
+    }
+    .center{
+        width: 1200px;
+        height: 720px;
+        position: absolute;
+        left:50%;
+        top: 50%;
+        margin-left:-600px;
+        margin-top:-360px;
+        
+        
+    }
+    .item{
+        width:40px;
+        height: 30px;
+        position: absolute;
+        transition: transform ease 3s;
+
+    }
+    </style>
+</head>
+<body>
+    <div class="center" id="box"></div>
+    <!-- <img src="./img/1.jpg" alt="" width="1200px" height="720px"> -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script  type="text/javascript">
+    $(function(){
+        for(var i = 0;i<1200;i++){
+            x = i%40;
+            y = parseInt(i/40);
+            $("<div class='item'></div>").css({
+                "background":"url(img/1.jpg) no-repeat ",
+                "background-size":"1200px 720px",
+                "background-position": x*(-30)+"px "+y*(-24)+"px", 
+                "left":x*30+"px",
+                "top":y*24+"px"
+            }).appendTo($("#box"))
+        }
+        var noseprate =true;
+       $("#box").click(function(){
+           if (noseprate){
+            $(".item").each(function(){
+                  var transX = Math.random()*6000-2000;
+                  var transY = Math.random()*6000-2000;
+                     $(this).css(
+                         {"transform":"translate("+transX+"px,"+transY+"px)"
+                        }
+                     )
+                 })
+                 noseprate = false;
+           }
+           else{
+            $(".item").each(function(){
+                $(this).css({"transform":"translate(0px,0px)"})
+            })
+            noseprate = true;
+           }
+       })
+
+
+
+
+
+        //  if (noseprate){
+        //      $("#box").click(function(){
+        //          $(".item").each(function(){
+        //           var transX = Math.random()*4000-2000;
+        //           var transY = Math.random()*4000-2000;
+        //              $(this).css(
+        //                  {"transform":"translate("+transX+"px,"+transY+"px)"
+        //                 }
+        //              )
+        //          })
+        //          noseprate = false;
+        //      })
+             
+        //  }else{
+        //     $("#box").click(function(){
+        //          $(".item").each(function(){
+                
+        //              $(this).css(
+        //                  {"transform":"translate(0px,0px)"
+        //                 }
+        //              )
+        //          })
+        //          noseprate=true;
+        //      })
+        //  }
+    })
+    </script>
+
+
+</body>
+</html>

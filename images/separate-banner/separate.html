@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        html,
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #box {
+            width: 1200px;
+            height: 720px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -600px;
+            margin-top: -360px;
+            /* background:#ff6700; */
+            overflow: hidden;
+        }
+
+        .item {
+            width: 30px;
+            height: 24px;
+            position: absolute;
+            transition: transform 0.5s;
+        }
+
+        .btn {
+            position: relative;
+            width: 100%;
+            z-index: 1;
+            font-size: 60px;
+            top: 50%;
+            margin-top: -75px;
+            color: #ffffff;
+        }
+
+        .pre,
+        .next {
+            position: absolute;
+            display: inline-block;
+            width: 100px;
+            height: 150px;
+            line-height: 150px;
+            background: #333;
+            opacity: 0.5;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .next {
+            right: 0px;
+        }
+        .newindex{
+            background: url(img/1.jpg) no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="box">
+        <div class="btn">
+            <div class="pre">&lt;</div>
+            <div class="next">&gt;</div>
+        </div>
+    </div>
+    <script src="./js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var imgUrl = "img/6.jpg";
+            var index = 6;
+            var c = 0;
+            var noseparate = true;
+
+            show()
+
+            function preOne(){
+                index--;
+                if (index < 1) {
+                    index = 6;
+                }
+                
+                show();
+                separate();
+                setTimeout(unseparate,1000)
+
+
+            }
+            $(".pre").click(function () {
+                preOne();
+               
+            })
+            $(".next").click(function () {
+                separate();
+                index++;
+                if (index > 6) {
+                    index = 1;
+                }
+                show();
+                separate();
+                setTimeout(unseparate,2000)
+                // console.log(index)
+
+
+            })
+            function show() {
+                $(".item").remove();
+                for (var i = 0; i < 1200; i++) {
+                    var x = i % 40;
+                    var y = parseInt(i / 40);
+                    $("<div class='item'></div>").css({
+                        "background": "url(img/" + index + ".jpg) no-repeat",
+                        "background-size": "1200px 720px",
+                        "background-position": x * (-30) + "px " + y * (-24) + "px",
+                        "left": x * 30 + "px",
+                        "top": y * 24 + "px",
+                    }).appendTo($("#box"))
+                }
+
+            }
+            function separate() {
+                $(".item").each(function () {
+                    var transX = Math.random() * 2000 - 1000;
+                    var transY = Math.random() * 2000 - 1000;
+                    $(this).css({
+                        "transform": "translate(" + transX + "px," + transY + "px)",
+                    })
+
+
+                })
+            }
+            function unseparate() {
+                
+                $(".item").each(function () {
+                    $(this).css({
+
+                        "transform": "translate(0px,0px)",
+
+
+                    })
+                })
+
+            }
+
+
+            setInterval(preOne,5000)
+
+        })
+
+    </script>
+</body>
+
+</html>
